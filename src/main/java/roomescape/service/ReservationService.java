@@ -17,7 +17,13 @@ public class ReservationService {
     }
 
     public Reservation createReservation(Reservation reservation) {
-        return reservationRepository.create(reservation);
+        Reservation createdReservation = reservationRepository.create(reservation);
+
+        return readReservation(createdReservation.getId());
+    }
+
+    public Reservation readReservation(Long id) {
+        return reservationRepository.read(id);
     }
 
     public List<Reservation> readAllReservation() {
