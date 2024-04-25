@@ -2,7 +2,7 @@ package roomescape.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import roomescape.entity.Reservation;
+import roomescape.domain.Reservation;
 import roomescape.repository.ReservationRepository;
 
 import java.util.List;
