@@ -28,7 +28,7 @@ public class ReservationRepository {
                     resultSet.getTime("time_value").toLocalTime())
     );
 
-    public long create(Reservation reservation) {
+    public Reservation create(Reservation reservation) {
         String sql = "INSERT INTO reservation (name, date, time_id) VALUES(?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -40,20 +40,8 @@ public class ReservationRepository {
             return ps;
         }, keyHolder);
 
-        return keyHolder.getKey().longValue();
-    }
-
-    public Reservation read(long reservationId) {
-        String sql = "SELECT r.id AS reservation_id, " +
-                "r.name, " +
-                "r.date, " +
-                "t.id AS time_id, " +
-                "t.start_at AS time_value " +
-                "FROM reservation AS r " +
-                "INNER JOIN reservation_time AS t " +
-                "ON r.time_id = t.id " +
-                "WHERE r.id = ?";
-        return jdbcTemplate.queryForObject(sql, rowMapper, reservationId);
+        Long id = keyHolder.getKey().longValue();
+        return new Reservation(id, reservation.getName(), reservation.getDate(), reservation.getTime());
     }
 
     public List<Reservation> readAll() {

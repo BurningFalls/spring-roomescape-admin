@@ -17,13 +17,7 @@ public class ReservationService {
     }
 
     public Reservation createReservation(Reservation reservation) {
-        long reservationId = reservationRepository.create(reservation);
-
-        return readReservation(reservationId);
-    }
-
-    public Reservation readReservation(long reservationId) {
-        return reservationRepository.read(reservationId);
+        return reservationRepository.create(reservation);
     }
 
     public List<Reservation> readAllReservation() {
