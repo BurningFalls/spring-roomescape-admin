@@ -2,7 +2,6 @@ package roomescape.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import roomescape.dto.ReservationDto;
 import roomescape.entity.Reservation;
 import roomescape.repository.ReservationRepository;
 
@@ -17,8 +16,8 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
-    public Reservation createReservation(ReservationDto reservationDto) {
-        long reservationId = reservationRepository.create(reservationDto);
+    public Reservation createReservation(Reservation reservation) {
+        long reservationId = reservationRepository.create(reservation);
 
         return readReservation(reservationId);
     }

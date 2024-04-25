@@ -3,19 +3,19 @@ package roomescape.entity;
 import java.time.LocalDate;
 
 public class Reservation {
-    private final long id;
+    private final Long id;
     private final String name;
     private final LocalDate date;
     private final ReservationTime time;
 
-    public Reservation(long id, String name, LocalDate date, ReservationTime time) {
+    public Reservation(Long id, String name, LocalDate date, ReservationTime time) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.time = time;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
