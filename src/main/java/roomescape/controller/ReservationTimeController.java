@@ -30,7 +30,7 @@ public class ReservationTimeController {
     private ReservationTime makeTimeObject(ReservationTimeRequestDto reservationTimeRequestDto) {
         LocalTime startAt = reservationTimeRequestDto.startAt();
 
-        return new ReservationTime(null, startAt);
+        return ReservationTime.of(null, startAt);
     }
 
     private ReservationTimeResponseDto makeTimeResponseDto(ReservationTime reservationTime) {

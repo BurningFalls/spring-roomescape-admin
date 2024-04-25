@@ -19,7 +19,7 @@ public class ReservationTimeRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private final RowMapper<ReservationTime> rowMapper = (resultSet, rowNum) -> new ReservationTime(
+    private final RowMapper<ReservationTime> rowMapper = (resultSet, rowNum) -> ReservationTime.of(
             resultSet.getLong("id"),
             resultSet.getTime("start_at").toLocalTime()
     );
@@ -34,8 +34,7 @@ public class ReservationTimeRepository {
             return ps;
         }, keyHolder);
 
-        Long id = keyHolder.getKey().longValue();
-        return new ReservationTime(id, reservationTime.getStartAt());
+        return ReservationTime.withNewId(reservationTime, keyHolder.getKey().longValue());
     }
 
     public List<ReservationTime> readAll() {

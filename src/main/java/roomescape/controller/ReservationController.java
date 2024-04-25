@@ -36,9 +36,9 @@ public class ReservationController {
         String name = reservationRequestDto.name();
         LocalDate date = reservationRequestDto.date();
         Long timeId = reservationRequestDto.timeId();
-        ReservationTime reservationTime = new ReservationTime(timeId, null);
+        ReservationTime time = ReservationTime.of(timeId, null);
 
-        return new Reservation(null, name, date, reservationTime);
+        return Reservation.of(null, name, date, time);
     }
 
     private ReservationResponseDto makeReservationResponseDto(Reservation reservation) {

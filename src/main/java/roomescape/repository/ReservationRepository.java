@@ -20,11 +20,11 @@ public class ReservationRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private final RowMapper<Reservation> rowMapper = (resultSet, rowNum) -> new Reservation(
+    private final RowMapper<Reservation> rowMapper = (resultSet, rowNum) -> Reservation.of(
             resultSet.getLong("reservation_id"),
             resultSet.getString("name"),
             resultSet.getDate("date").toLocalDate(),
-            new ReservationTime(resultSet.getLong("time_id"),
+            ReservationTime.of(resultSet.getLong("time_id"),
                     resultSet.getTime("time_value").toLocalTime())
     );
 
@@ -39,9 +39,8 @@ public class ReservationRepository {
             ps.setLong(3, reservation.getTime().getId());
             return ps;
         }, keyHolder);
-
-        Long id = keyHolder.getKey().longValue();
-        return new Reservation(id, reservation.getName(), reservation.getDate(), reservation.getTime());
+        
+        return Reservation.withNewId(reservation, keyHolder.getKey().longValue());
     }
 
     public List<Reservation> readAll() {

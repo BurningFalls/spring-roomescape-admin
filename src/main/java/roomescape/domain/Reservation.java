@@ -8,11 +8,19 @@ public class Reservation {
     private final LocalDate date;
     private final ReservationTime time;
 
-    public Reservation(Long id, String name, LocalDate date, ReservationTime time) {
+    private Reservation(Long id, String name, LocalDate date, ReservationTime time) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.time = time;
+    }
+
+    public static Reservation of(Long id, String name, LocalDate date, ReservationTime time) {
+        return new Reservation(id, name, date, time);
+    }
+
+    public static Reservation withNewId(Reservation source, Long id) {
+        return new Reservation(id, source.name, source.date, source.time);
     }
 
     public Long getId() {

@@ -9,9 +9,17 @@ public class ReservationTime {
     @JsonFormat(pattern = "HH:mm")
     private final LocalTime startAt;
 
-    public ReservationTime(Long id, LocalTime startAt) {
+    private ReservationTime(Long id, LocalTime startAt) {
         this.id = id;
         this.startAt = startAt;
+    }
+
+    public static ReservationTime of(Long id, LocalTime startAt) {
+        return new ReservationTime(id, startAt);
+    }
+
+    public static ReservationTime withNewId(ReservationTime source, Long id) {
+        return new ReservationTime(id, source.startAt);
     }
 
     public Long getId() {
